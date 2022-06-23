@@ -4,7 +4,9 @@
 
 @layer components {
     .pokecard {
-        @apply bg-white rounded-2xl drop-shadow-lg;
+        @apply bg-white rounded-2xl drop-shadow-lg bg-[url('@/assets/img/pokeballcolor.svg')] bg-no-repeat;
+        background-size: 62%;
+        background-position-x: -83px;
         &:hover {
             @apply drop-shadow-2xl ease-in duration-300;
         }
@@ -25,4 +27,5 @@
     .bg-pokeball {
         @apply bg-[url('@/assets/img/pokeball.svg')] bg-contain bg-no-repeat bg-center;
     }
+   
 }

@@ -1,38 +1,52 @@
 <template>
-  <div class="bg-primary p-8 pb-40">
-    <label class="relative block">
-      <span class="sr-only">Search</span>
-      <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-        <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"><!-- ... --></svg>
-      </span>
-      <input v-model="search" class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search"/>
-    </label>
-    <div>
-      <div 
-        v-for="type in types"
-        :key="type.name"
-        @click="_getFilterTypes(type)"
-        class="tag cursor-pointer ml-4 text-xs bg-orange-200 text-orange-700" :class="{ 'ring-2 ring-emerald-500 ring-inset': type.name == selected_type }">
-        {{ type.name }}
+  <div class="bg-primary px-8 py-2 pb-32">
+    <div class="mx-auto">
+        <div class="max-w-xl mx-auto">
+          <label class="relative block">
+            <input v-model="search" class="rounded-full text-center placeholder:text-slate-400 block bg-white w-full border border-slate-300  py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search Pokémon o filter by type..." type="text" name="search"/>
+            <span class="absolute inset-y-0 right-0 text-gray-500 flex items-center pr-4">
+              <i class="fa fa-search"></i>
+            </span>
+          </label>
+        </div>
+      <div class="mt-10 mx-auto max-w-6xl">
+        <Carousel :settings="settings" :breakpoints="breakpoints">
+          <Slide v-for="type in types" :key="type.name">
+            <div 
+              @click="_getFilterTypes(type)"
+              class="tag cursor-pointer ml-4 text-xs bg-orange-200 text-orange-700" :class="{ 'ring-2 ring-emerald-500 ring-inset': type.name == selected_type }">
+              {{ type.name }}
+            </div>
+          </Slide>
+
+          <template #addons>
+            <Navigation />
+          </template>
+        </Carousel>
+        
+        <div v-if="selected_type" @click="_loadPokemons()" class="tag">CLEAR FILTERS <i class="fa fa-xmark ml-1"></i></div>
       </div>
-      <div v-if="selected_type" @click="_loadPokemons()" class="tag">CLEAR FILTERS <i class="fa fa-xmark ml-1"></i></div>
     </div>
   </div>
   <div class="container mx-auto">
   <div class="grid grid-cols-4 gap-8 -mt-12">
-    <div class="pokecard p-4" 
+    <div class="pokecard p-4 flex items-center justify-center" 
       v-for="pokemon in filtered_pokemons"
       :key="pokemon.name">
-       <div class="text-center">
-         <img
-        :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${_getId(
-          pokemon
-        )}.png`"
-        :alt="pokemon.name" class="mx-auto w-[10rem]"/>
+       <div class="relative">
+         <div class="uppercase absolute text-lg font-extrabold">
+           {{ _getName(pokemon) }}
+           <div class="-mt-2 text-sm">#{{ _getId(pokemon) }}</div>
+         </div>
+         <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${_getId(pokemon)}.png`" :alt="pokemon.name" class="mx-auto w-[10rem]"/>
        </div>
-       <div class="flex justify-between">
-        <div><button class="btn border border-green-500 text-green-500" @click="_showPokemon(_getId(pokemon))">Quickview</button></div>
-        <div><button class="btn btn-cta" @click="_showPokemon(_getId(pokemon))">Pokemon</button></div>
+       <div class="">
+        <div class="mb-4"><button class="btn border bg-white border-green-500 text-green-500 w-full" @click="_showPokemon(_getId(pokemon))">Quickview</button></div>
+        <div>
+          <router-link :to="{name: 'pokemon', params: {id: _getId(pokemon) }}">
+            <button class="btn btn-cta w-full">Pokemon</button>
+          </router-link>
+        </div>
       </div>
     </div>
 
@@ -96,6 +110,8 @@
 import PokeModal from '@/components/PokeModal.vue'
 import PokeTabs from '@/components/PokeTabs.vue'
 
+import 'vue3-carousel/dist/carousel.css';
+
 export default {
   components: { PokeModal, PokeTabs },
   name: 'Home',
@@ -109,6 +125,23 @@ export default {
       selected_pokemon: null,
       showModal: false,
       tabList: ["Base Stats", "About"],
+      settings: {
+        itemsToShow: 1,
+        snapAlign: 'center',
+      },
+      breakpoints: {
+      // 700px and up
+      700: {
+        itemsToShow: 3.5,
+        snapAlign: 'center',
+      },
+      // 1024 and up
+      1024: {
+        itemsToShow: 12,
+        itemsToScroll: 4,	
+        snapAlign: 'start',
+      },
+    },
     }
   },
   
