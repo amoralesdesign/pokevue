@@ -8,19 +8,3 @@
 	</nav>
 </template>
 
-<script>
-export default {
-  name: "Header",
-  data() {
-    return {
-      menuShow: false
-    }
-  },
-  methods: {
-    toggleNavbar: function(){
-      this.menuShow = !this.menuShow;
-    }
-  }
-}
-</script>
-

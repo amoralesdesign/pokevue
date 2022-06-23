@@ -68,9 +68,7 @@ export default {
     return{
       loading: true,
       url: null,
-      isFront: true,
       tab_list: [],
-      currentImg: '',
       pokemonData: {},
       pokemon: {
         name: '',
@@ -100,18 +98,8 @@ export default {
   },
   
   methods: {
-    setSprite: function(){
-      if(this.isFront){
-        this.isFront = false;
-        this.currentImg = this.pokemon.shiny;
-      }else{
-        this.isFront = true;
-        this.currentImg = this.pokemon.front;
-      }
-    },
 
     _loadPokemonData: function(){
-      
    
       this.url = 'https://pokeapi.co/api/v2/pokemon/'+this.referenceid;
 
@@ -121,7 +109,6 @@ export default {
         this.pokemon.id = res.data.id;
         this.pokemon.stats = res.data.stats;
         this.pokemon.shiny = res.data.sprites.front_shiny;
-        this.currentImg = this.pokemon.front;
         this.pokemon.height = res.data.height;
         this.pokemon.weight = res.data.weight;
         this.pokemon.types = res.data.types;
@@ -147,10 +134,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-  h3{
-    font-weight: 600;
-    margin-bottom: 2rem;
-  }
-</style>

@@ -23,13 +23,14 @@
             <Navigation />
           </template>
         </Carousel>
-        
-        <div v-if="selected_type" @click="_loadPokemons()" class="tag">CLEAR FILTERS <i class="fa fa-xmark ml-1"></i></div>
+        <div class="text-center">
+          <div v-if="selected_type" @click="_loadPokemons()" class="tag border border-gray-900 text-gray-900 text-xs mt-3">remove filters <i class="fa fa-xmark ml-1"></i></div>
+        </div>     
       </div>
     </div>
   </div>
   <div class="container mx-auto">
-  <div class="grid lg:grid-cols-4 gap-8 -mt-12">
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 -mt-12">
     <div class="pokecard p-4 flex items-center justify-center" 
       v-for="pokemon in filtered_pokemons"
       :key="pokemon.name">
@@ -52,7 +53,7 @@
 
     <PokeModal ref="pokemodal" v-show="showModal" @close-modal="showModal = false">
       <template v-if="id_selected" v-slot:content>
-        <Pokemon refs="pokedetail" :referenceid="id_selected" :quickview="true"/>
+        <Pokemon refs="pokedetail" :referenceid="id_selected" :quickview="true" class="overflow-hidden"/>
       </template>
     </PokeModal>
   </div>
@@ -62,8 +63,6 @@
 <script>
 
 export default {
-
- name: 'Home',
 
   data() {
     return {
@@ -145,8 +144,6 @@ export default {
     _showPokemon(id) {
         this.id_selected = id;
         this.showModal = !this.showModal;
-        //this.$refs.pokedetail._loadPokemonData;
-    
     },
     _getMoveLevel(move) {
       for (let version of move.version_group_details) {
@@ -159,20 +156,7 @@ export default {
       }
       return 0;
     },
-    filter_moves(pokemon) {
-      return pokemon.moves.filter((item) => {
-        let include = false;
-        for (let version of item.version_group_details) {
-          if (
-            version.version_group.name == "sword-shield" &&
-            version.move_learn_method.name == "level-up"
-          ) {
-            include = true;
-          }
-        }
-        return include;
-      });
-    },
+    
   },
   computed: {
     filtered_pokemons() {

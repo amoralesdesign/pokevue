@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-primary pt-32"></div>
+  <div class="bg-primary pt-14 lg:pt-32"></div>
   <div class="container mx-auto -mt-12">
-    <div class="grid grid-cols-2">
+    <div class="grid lg:grid-cols-2">
       <div class="drop-shadow-2xl">
         <Pokemon refs="pokedetail" :referenceid="$route.params.id" :quickview="false" />
       </div>
