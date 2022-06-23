@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 // Components
 import Home from '@/views/Home.vue';
-import PokemonSheet from '@/views/PokemonSheet.vue';
+import PokemonDetail from '@/views/PokemonDetail.vue';
 
 // Config de rutas
 const routes = [
@@ -14,7 +14,7 @@ const routes = [
   {
     path: "/pokemon/:id",
     name: "pokemon",
-    component: PokemonSheet
+    component: PokemonDetail,
   }
 ];
 
