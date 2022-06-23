@@ -1,10 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
-// Components
 import Home from '@/views/Home.vue';
 import PokemonDetail from '@/views/PokemonDetail.vue';
 
-// Config de rutas
+// Config routes
 const routes = [
   {
     path: "/",
@@ -18,7 +16,7 @@ const routes = [
   }
 ];
 
-// Creo objeto rutas
+// Create router object
 const router = createRouter({
   history: createWebHistory(),
   routes

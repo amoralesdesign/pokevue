@@ -24,7 +24,7 @@
           </template>
         </Carousel>
         <div class="text-center">
-          <div v-if="selected_type" @click="_loadPokemons()" class="tag border border-gray-900 text-gray-900 text-xs mt-3">remove filters <i class="fa fa-xmark ml-1"></i></div>
+          <div v-if="selected_type" @click="_loadPokemons()" class="tag cursor-pointer border border-gray-900 text-gray-900 text-xs mt-3">remove filters <i class="fa fa-xmark ml-1"></i></div>
         </div>     
       </div>
     </div>
@@ -111,9 +111,6 @@ export default {
       .get("https://pokeapi.co/api/v2/pokemon?limit=151")
       .then((response) => {
         this.pokemons = response.data.results;
-        // response.data.results.map((pokemon) => {
-        //   return this._getPokemonData(pokemon);
-        // });
       });
 
       this.selected_type = null;
@@ -144,17 +141,6 @@ export default {
     _showPokemon(id) {
         this.id_selected = id;
         this.showModal = !this.showModal;
-    },
-    _getMoveLevel(move) {
-      for (let version of move.version_group_details) {
-        if (
-          version.version_group.name == "sword-shield" &&
-          version.move_learn_method.name == "level-up"
-        ) {
-          return version.level_learned_at;
-        }
-      }
-      return 0;
     },
     
   },
