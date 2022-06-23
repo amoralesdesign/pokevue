@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .pokecard {
+        @apply bg-white rounded-2xl drop-shadow-lg;
+        &:hover {
+            @apply drop-shadow-2xl ease-in duration-300;
+        }
+    }
+    .tag {
+        @apply inline-flex items-center font-bold uppercase px-3 py-1 rounded-full;
+    }
+    .btn {
+        @apply rounded-full py-2 px-5 uppercase font-light;
+        &:hover {
+            @apply scale-105 ease-in duration-200;
+        }
+    }
+    .btn-cta {
+        background: linear-gradient(90deg,#9fdea2,#28cba3);
+        color: white;
+    }
+    .bg-pokeball {
+        @apply bg-[url('@/assets/img/pokeball.svg')] bg-contain bg-no-repeat bg-center;
+    }
+}
