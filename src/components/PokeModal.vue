@@ -1,3 +1,4 @@
+<!-- Modal component -->
 <template>
   <transition name="modal-fade">
     <div class="modal-overlay" @click="$emit('close-modal')">

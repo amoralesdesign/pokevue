@@ -1,3 +1,4 @@
+<!-- Tabs component, can be displayed both horizontally and vertically. -->
 <template>
   <div
     :class="{

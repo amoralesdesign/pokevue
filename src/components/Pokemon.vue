@@ -1,3 +1,4 @@
+<!-- Pokémon data, if the quickview parameter is passed, some options are hidden. -->
 <template>
   <div>
     <div v-if="!loading" :class="'bg-'+pokemon.types[0].type.name" class="rounded-lg relative bg-pokeball">
