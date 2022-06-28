@@ -21,14 +21,14 @@
         }"
       >
         <label
-          :for="`${_uid}${index}`"
+          :for="`${index}`"
           v-text="tab"
           class="cursor-pointer block"
         />
         <input
-          :id="`${_uid}${index}`"
+          :id="`${index}`"
           type="radio"
-          :name="`${_uid}-tab`"
+          :name="`-tab`"
           :value="index + 1"
           v-model="activeTab"
           class="hidden"

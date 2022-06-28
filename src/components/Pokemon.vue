@@ -84,7 +84,7 @@ export default {
     }
   },
   props: {
-    referenceid: Number,
+    referenceid: [Number,String],
     name: String,
     quickview: {
       type: Boolean,
