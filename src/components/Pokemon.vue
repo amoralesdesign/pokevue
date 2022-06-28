@@ -70,7 +70,6 @@ export default {
       loading: true,
       url: null,
       tab_list: [],
-      pokemonData: {},
       pokemon: {
         name: '',
         id:'',
@@ -105,14 +104,13 @@ export default {
       this.url = 'https://pokeapi.co/api/v2/pokemon/'+this.referenceid;
 
       this.$http.get(this.url).then(res => {
-        this.pokemonData = res.data;
-        this.pokemon.name = res.data.name;
-        this.pokemon.id = res.data.id;
-        this.pokemon.stats = res.data.stats;
-        this.pokemon.shiny = res.data.sprites.front_shiny;
-        this.pokemon.height = res.data.height;
-        this.pokemon.weight = res.data.weight;
-        this.pokemon.types = res.data.types;
+        this.pokemon.name      = res.data.name;
+        this.pokemon.id        = res.data.id;
+        this.pokemon.stats     = res.data.stats;
+        this.pokemon.shiny     = res.data.sprites.front_shiny;
+        this.pokemon.height    = res.data.height;
+        this.pokemon.weight    = res.data.weight;
+        this.pokemon.types     = res.data.types;
         this.pokemon.abilities = res.data.abilities;
         this.pokemon.moves     = res.data.moves;
 
